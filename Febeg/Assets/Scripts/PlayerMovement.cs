@@ -26,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
+    //Crouch vars
+    public bool isCrouching = false;
+    public float crouchingMultiplier;
+    public float crouchingHeight = 1f;
+    public float standingHeight = 2f;
+
     
 
 
@@ -59,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        
+
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift)) {
  
              isRunning = true;
@@ -69,7 +77,16 @@ public class PlayerMovement : MonoBehaviour
              isRunning = false;
              speed = NormalSpeed;
  
-         }
+        }
+
+        if(Input.GetKey(KeyCode.LeftControl)) {
+            controller.height = crouchingHeight;
+            move *= crouchingMultiplier;
+        } else {
+            controller.height = standingHeight;
+        }
+
+        
 
 
     }
