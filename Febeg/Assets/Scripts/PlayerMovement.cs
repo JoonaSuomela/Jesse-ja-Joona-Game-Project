@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     //Runninng variables
     public float RunSpeed = 20f;
     public float NormalSpeed = 12f;
-
     bool isRunning = false;
 
 
@@ -27,24 +26,14 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
-    //Crouching variables
-    public float crouchHeight = 0.9f;
-    public float standingHeight = 1.8f;
-    private float timeToCrouch = 0.25f;
-    private float Vector3 crouchCenter = new Vector3(0,0.9f,0);
-    private float Vector3 standingCenter = new Vector3(0,0,0);
-    private bool isCrouching;
-    private bool duringCrouchAnimation;
-    private KeyCode crouchKey = KeyCode.leftControl;
-    private bool canCrouch = true;
+    
 
 
 
     // Update is called once per frame
     void Update()
     {
-        if(canCrouch)
-            HandleCrouch();
+        
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -70,7 +59,17 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift)) {
+ 
+             isRunning = true;
+             speed = RunSpeed;
+ 
+         } else {
+ 
+             isRunning = false;
+             speed = NormalSpeed;
+ 
+         }
 
 
     }
