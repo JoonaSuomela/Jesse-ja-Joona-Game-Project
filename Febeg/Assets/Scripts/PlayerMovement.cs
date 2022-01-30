@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed = 12f;
 
+
+
     //Jumping and Gravity variables
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
@@ -31,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
     public float crouchingMultiplier;
     public float crouchingHeight = 1f;
     public float standingHeight = 2f;
-
-    
 
 
 
@@ -86,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
             controller.height = standingHeight;
         }
 
-        
 
 
     }
