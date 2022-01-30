@@ -40,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-
+        if(!PauseMenu.isPaused) {
+            
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0) 
@@ -87,6 +88,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
+        }
     }
 }

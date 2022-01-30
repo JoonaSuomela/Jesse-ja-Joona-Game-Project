@@ -10,7 +10,6 @@ public class Animations : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        Debug.Log("animator");
     }
 
     // Update is called once per frame
@@ -31,7 +30,7 @@ public class Animations : MonoBehaviour
         }
 
         //Jumping animation
-        if(Input.GetKey(KeyCode.Space)) {
+        if(Input.GetButton("Jump")) {
             animator.SetBool("isJumping", true);
         } else if(!Input.GetKey(KeyCode.Space)) {
             animator.SetBool("isJumping", false);
