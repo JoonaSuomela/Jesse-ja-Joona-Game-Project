@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     //Crouch vars
     public bool isCrouching = false;
     public float crouchingMultiplier;
-    public float crouchingHeight = 1f;
+    public float crouchingHeight = 1.5f;
     public float standingHeight = 2f;
 
 
@@ -70,13 +70,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift)) {
  
-             isRunning = true;
-             speed = RunSpeed;
+            isRunning = true;
+            speed = RunSpeed;
+            
  
-         } else {
+        } else {
  
-             isRunning = false;
-             speed = NormalSpeed;
+            isRunning = false;
+            speed = NormalSpeed;
  
         }
 
@@ -86,8 +87,6 @@ public class PlayerMovement : MonoBehaviour
         } else {
             controller.height = standingHeight;
         }
-
-
         }
     }
 }

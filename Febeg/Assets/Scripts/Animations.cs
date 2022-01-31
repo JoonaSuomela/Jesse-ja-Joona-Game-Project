@@ -32,8 +32,36 @@ public class Animations : MonoBehaviour
         //Jumping animation
         if(Input.GetButton("Jump")) {
             animator.SetBool("isJumping", true);
-        } else if(!Input.GetKey(KeyCode.Space)) {
+        } else if(!Input.GetButton("Jump")) {
             animator.SetBool("isJumping", false);
+        }
+
+        //Crouching idle animation
+        if(Input.GetKey(KeyCode.LeftControl)) {
+            animator.SetBool("isCrouchingIdle", true);
+        } else if(!Input.GetKey(KeyCode.LeftControl)) {
+            animator.SetBool("isCrouchingIdle", false);
+        }
+
+        //Walking backwards animation
+        if(Input.GetKey(KeyCode.S)) {
+            animator.SetBool("isWalkingBackwards", true);
+        } else if(!Input.GetKey(KeyCode.S)) {
+            animator.SetBool("isWalkingBackwards", false);
+        }
+
+        //Walking left animation
+        if(Input.GetKey(KeyCode.A)) {
+            animator.SetBool("isWalkingLeft", true);
+        } else if(!Input.GetKey(KeyCode.A)) {
+            animator.SetBool("isWalkingLeft", false);
+        }
+
+        //Walking right animation
+        if(Input.GetKey(KeyCode.D)) {
+            animator.SetBool("isWalkingRight", true);
+        } else if(!Input.GetKey(KeyCode.D)) {
+            animator.SetBool("isWalkingRight", false);
         }
     }
 }
