@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quest1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/GameOverScreen.unity
+    guid: 89b3dde7900309d40bb9793d79a252e7
+  - enabled: 1
+    path: Assets/Scenes/StartingRoom.unity
+    guid: a2fa8107e4844644a8e2a7aca5eb0aef
+  - enabled: 1
+    path: Assets/Scenes/MainRoom.unity
+    guid: b61daefad151ce24194a492272e50da7
   m_configObjects: {}
