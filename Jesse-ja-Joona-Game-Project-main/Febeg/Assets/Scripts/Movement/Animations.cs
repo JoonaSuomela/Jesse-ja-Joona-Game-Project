@@ -15,6 +15,7 @@ public class Animations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Walking animation
         if(Input.GetKey(KeyCode.W)) {
             animator.SetBool("isWalking", true);
@@ -32,7 +33,7 @@ public class Animations : MonoBehaviour
         //Jumping animation
         if(Input.GetButton("Jump")) {
             animator.SetBool("isJumping", true);
-        } else if(!Input.GetButton("Jump")) {
+        } else if(!Input.GetButtonUp("Jump")) {
             animator.SetBool("isJumping", false);
         }
 
