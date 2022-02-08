@@ -4,89 +4,140 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    float playerHeight = 2f;
 
-    public CharacterController controller;
+    [SerializeField] Transform orientation;
 
-    public float speed = 12f;
+    [Header("Movement")]
+    public float moveSpeed = 6f;
+    public float movementMultiplier = 10f;
+    [SerializeField] float airMultiplier = 4f;
 
+    [Header("Sprinting")]
+    [SerializeField] float walkSpeed = 4f;
+    [SerializeField] float sprintSpeed = 6f;
+    [SerializeField] float acceleration = 10f;
 
+    [Header("Jumping")]
+    public float jumpForce = 5f;
 
-    //Jumping and Gravity variables
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
-    Vector3 velocity;
+    [Header("Keybinds")]
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
 
-    //Runninng variables
-    public float RunSpeed = 20f;
-    public float NormalSpeed = 12f;
-    bool isRunning = false;
+    [Header("Drag")]
+    [SerializeField] float groundDrag = 6f;
+    [SerializeField] float airDrag = 6f;
 
+    float horizontalMovement;
+    float verticalMovement;
 
-    //GroundCheck variables
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    [Header("Ground Detection")]
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundMask;
     bool isGrounded;
+    float groundDistance = 0.4f;
 
-    //Crouch vars
-    public bool isCrouching = false;
-    public float crouchingMultiplier;
-    public float crouchingHeight = 1.5f;
-    public float standingHeight = 2f;
+    Vector3 moveDirection;
+    Vector3 slopeMoveDirection;
 
+    RaycastHit slopeHit;
 
+    Rigidbody rb;
+
+    private bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f))
+        {
+            if (slopeHit.normal != Vector3.up)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private void Start() {
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-        if(!PauseMenu.isPaused) {
-            
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if(isGrounded && velocity.y < 0) 
+        MyInput();
+        ControlDrag();
+        ControlSpeed();
+
+        if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
-            velocity.y = -2f;
+            Jump();
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
+        slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+    }
 
 
-        controller.Move(move * speed * Time.deltaTime);
-
-        if(Input.GetButtonDown("Jump") && isGrounded) 
+    void Jump()
+    {
+        if (isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
+    }
 
-        velocity.y += gravity * Time.deltaTime;
+    void ControlSpeed()
+    {
+        if (Input.GetKey(sprintKey) && isGrounded)
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+        }
+    }
 
-        controller.Move(velocity * Time.deltaTime);
 
+
+    void MyInput() {
+
+        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        verticalMovement = Input.GetAxisRaw("Vertical");
+
+        moveDirection = orientation.forward * verticalMovement + orientation.right * horizontalMovement;
+    }
+
+    void ControlDrag() {
+        if(isGrounded) {
+            rb.drag = groundDrag;
+        } else {
+            rb.drag = airDrag;
+        }
+    }
+
+    private void FixedUpdate() {
+        MovePlayer();
+    }
+
+    void MovePlayer() {
         
-
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift)) {
- 
-            isRunning = true;
-            speed = RunSpeed;
-            
- 
-        } else {
- 
-            isRunning = false;
-            speed = NormalSpeed;
- 
+        if(isGrounded && !OnSlope()) {
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        } 
+        else if (isGrounded && OnSlope()){
+            rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        } 
+        else if(!isGrounded) {
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
         }
-
-        if(Input.GetKey(KeyCode.LeftControl)) {
-            controller.height = crouchingHeight;
-            move *= crouchingMultiplier;
-        } else {
-            controller.height = standingHeight;
-        }
-        }
+        
     }
 }
