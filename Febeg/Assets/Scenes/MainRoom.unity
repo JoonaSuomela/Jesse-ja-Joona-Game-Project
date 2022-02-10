@@ -362,6 +362,7 @@ MonoBehaviour:
   orientation: {fileID: 38335029}
   moveSpeed: 10
   movementMultiplier: 10
+  gravityModifier: 0
   airMultiplier: 0.4
   walkSpeed: 10
   sprintSpeed: 20
@@ -2146,7 +2147,7 @@ PrefabInstance:
     - target: {fileID: -7918335002988649766, guid: e11b865292fe0294bb4caf240d8d4f6b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f3eb0e4136052144eb5e7638c37a324b, type: 2}
+      objectReference: {fileID: 2100000, guid: bf111497a0eef754bae60d6d5b930389, type: 2}
     - target: {fileID: -7029948723529949830, guid: e11b865292fe0294bb4caf240d8d4f6b, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -2667,7 +2668,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f3eb0e4136052144eb5e7638c37a324b, type: 2}
+  - {fileID: 2100000, guid: bf111497a0eef754bae60d6d5b930389, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5627,7 +5628,7 @@ PrefabInstance:
     - target: {fileID: -7918335002988649766, guid: e11b865292fe0294bb4caf240d8d4f6b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f3eb0e4136052144eb5e7638c37a324b, type: 2}
+      objectReference: {fileID: 2100000, guid: bf111497a0eef754bae60d6d5b930389, type: 2}
     - target: {fileID: -7029948723529949830, guid: e11b865292fe0294bb4caf240d8d4f6b, type: 3}
       propertyPath: m_Layer
       value: 8

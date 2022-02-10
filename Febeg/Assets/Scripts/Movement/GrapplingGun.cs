@@ -60,13 +60,13 @@ public class GrapplingGun : MonoBehaviour {
     }
 
     private Vector3 currentGrapplePosition;
-    
+
     void DrawRope() {
 
         if (!joint) return;
 
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
-        
+
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
     }
