@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 6f;
     public float movementMultiplier = 10f;
+    public float gravityModifier;
     [SerializeField] float airMultiplier = 4f;
 
     [Header("Sprinting")]
@@ -64,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        Physics.gravity *= gravityModifier;
     }
 
     // Update is called once per frame
@@ -89,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 

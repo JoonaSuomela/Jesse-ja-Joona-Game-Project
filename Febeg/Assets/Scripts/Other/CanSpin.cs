@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CanSpin : MonoBehaviour
 {
-    float speed = 50.0f;
+    float speed = 70.0f;
     // Start is called before the first frame update
     void Start()
     {
