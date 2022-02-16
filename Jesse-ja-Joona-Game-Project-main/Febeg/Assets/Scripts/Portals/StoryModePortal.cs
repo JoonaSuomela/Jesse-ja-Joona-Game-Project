@@ -5,6 +5,6 @@ using UnityEngine.SceneManagement;
 public class StoryModePortal : MonoBehaviour
 {
     void OnTriggerEnter(Collider other){
-        SceneManager.LoadScene("Quest1");
+        SceneManager.LoadScene("Sauna");
     }
 }

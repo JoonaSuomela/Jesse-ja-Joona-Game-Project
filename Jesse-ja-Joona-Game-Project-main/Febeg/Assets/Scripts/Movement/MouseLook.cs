@@ -5,35 +5,43 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
 
-    public float mouseSensitivity = 100f;
+    [Header("References")]
+    [SerializeField] WallRun wallRun;
 
-    public Transform playerBody;
 
-    float xRotation = 0f;
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Transform cam;
+    [SerializeField] Transform orientation;
+
+    float mouseX;
+    float mouseY;
+
+    float multiplier = 0.01f;
+
+    float xRotation;
+    float yRotation;
+
+    private void Start()
     {
-        if(!PauseMenu.isPaused) {
+
         Cursor.lockState = CursorLockMode.Locked;
-        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(!PauseMenu.isPaused) {
-        Cursor.lockState = CursorLockMode.Locked;
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        mouseX = Input.GetAxisRaw("Mouse X");
+        mouseY = Input.GetAxisRaw("Mouse Y");
+         
+        yRotation += mouseX * sensX * multiplier;
+        xRotation -= mouseY * sensY * multiplier;
 
-        xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
-        } else {
-            Cursor.lockState = CursorLockMode.None;
+        cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, wallRun.tilt);
+        orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
         }
     }
 }
