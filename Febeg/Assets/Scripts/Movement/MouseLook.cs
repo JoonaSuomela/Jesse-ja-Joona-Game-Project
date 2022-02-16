@@ -8,8 +8,9 @@ public class MouseLook : MonoBehaviour
     [Header("References")]
     [SerializeField] WallRun wallRun;
 
-
+    [Range(0f, 1000f)]
     [SerializeField] private float sensX;
+    [Range(0f, 1000f)]
     [SerializeField] private float sensY;
 
     [SerializeField] Transform cam;

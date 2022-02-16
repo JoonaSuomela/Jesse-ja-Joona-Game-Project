@@ -79,8 +79,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
+            
             Jump();
         }
+
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
     }
@@ -88,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        FindObjectOfType<AudioManager>().Play("PlayerWalk");
         if (isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -113,8 +116,10 @@ public class PlayerMovement : MonoBehaviour
 
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
+        
 
         moveDirection = orientation.forward * verticalMovement + orientation.right * horizontalMovement;
+        
     }
 
     void ControlDrag() {
@@ -133,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         
         if(isGrounded && !OnSlope()) {
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+            
         } 
         else if (isGrounded && OnSlope()){
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);

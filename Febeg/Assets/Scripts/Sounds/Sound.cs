@@ -2,7 +2,7 @@ using UnityEngine.Audio;
 using UnityEngine;
 
 [System.Serializable]
-public class Sounds 
+public class Sound
 {
     public string name;
 
