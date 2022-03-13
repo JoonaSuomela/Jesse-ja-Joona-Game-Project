@@ -38,6 +38,15 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     float groundDistance = 0.4f;
 
+
+    [Header("Audio")]
+    [SerializeField] AudioClip jumpSound;
+    
+    
+    [SerializeField]private AudioSource playerAudio;
+    playerAudio = GetComponent<AudioSource>();
+    
+
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
 
@@ -78,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
             Jump();
+
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
