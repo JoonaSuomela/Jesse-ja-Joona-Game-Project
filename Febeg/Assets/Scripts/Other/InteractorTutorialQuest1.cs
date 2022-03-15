@@ -23,7 +23,7 @@ public class InteractorTutorialQuest1 : MonoBehaviour
             if(hit.collider.GetComponent<Interactable>() != false) {
 
                 if(Input.GetKeyDown(KeyCode.E)) {
-                    SceneManager.LoadScene("Quest1");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
             }
         }

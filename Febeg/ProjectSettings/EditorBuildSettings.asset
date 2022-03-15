@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOverScreen.unity
     guid: 89b3dde7900309d40bb9793d79a252e7
   - enabled: 1
+    path: Assets/Scenes/TutorialQuestion.unity
+    guid: d26a418325edcfb42b41ff553070a15a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 888ed7d816105464193c9b6abbfa2beb
+  - enabled: 1
     path: Assets/Scenes/Quest1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
@@ -27,9 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Quest3.unity
     guid: e221ec3e81ea20c4da13f1e30a6f2631
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 888ed7d816105464193c9b6abbfa2beb
-  - enabled: 1
-    path: Assets/Scenes/TutorialQuestion.unity
-    guid: d26a418325edcfb42b41ff553070a15a
+    path: Assets/Scenes/Quest4.unity
+    guid: 8ae9f49fc654ed34399c0f33759be2da
   m_configObjects: {}

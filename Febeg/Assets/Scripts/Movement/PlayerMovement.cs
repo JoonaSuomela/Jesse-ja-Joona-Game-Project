@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -66,11 +67,13 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         Physics.gravity *= gravityModifier;
+
     }
 
     // Update is called once per frame
     private void Update()
     {
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         MyInput();
@@ -83,14 +86,12 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
     }
 
 
     void Jump()
     {
-        FindObjectOfType<AudioManager>().Play("PlayerWalk");
         if (isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);

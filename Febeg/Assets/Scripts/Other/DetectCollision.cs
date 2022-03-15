@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class DetectCollision : MonoBehaviour
 {
     void OnTriggerEnter(Collider other){
-        SceneManager.LoadScene("GameOverScreen");
+        if(other.gameObject.layer == 9) {
+            SceneManager.LoadScene("GameOverScreen");
+        }
+        
     }
 }
