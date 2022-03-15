@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class DetectCollision : MonoBehaviour
 {
+    public GameObject deathScreen;
+
+    void Start()
+    {
+        deathScreen.SetActive(false);
+    }
     void OnTriggerEnter(Collider other){
         if(other.gameObject.layer == 9) {
-            SceneManager.LoadScene("GameOverScreen");
+            deathScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
         
     }
